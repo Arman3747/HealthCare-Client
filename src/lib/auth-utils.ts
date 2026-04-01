@@ -16,7 +16,7 @@ export const authRoutes = [
 ];
 
 export const commonProtectedRoutes: RouteConfig = {
-  exact: ["/my-profile", "/settings"],
+  exact: ["/my-profile", "/settings", "/change-password"],
   patterns: [],
 };
 
@@ -93,5 +93,3 @@ export const isValidRedirectForRole = (
   }
   return false;
 };
-
-
