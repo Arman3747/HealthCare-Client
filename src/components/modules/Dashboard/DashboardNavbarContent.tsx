@@ -15,6 +15,7 @@ interface DashboardNavbarContentProps {
   navItems?: NavSection[];
   dashboardHome?: string;
 }
+
 const DashboardNavbarContent = ({
   userInfo,
   navItems,
