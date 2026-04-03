@@ -1,24 +1,14 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 import { loginUser } from "@/services/auth/loginUser";
 import { useActionState, useEffect } from "react";
+import { toast } from "sonner";
+import InputFieldError from "./shared/InputFieldError";
 import { Button } from "./ui/button";
 import { Field, FieldDescription, FieldGroup, FieldLabel } from "./ui/field";
 import { Input } from "./ui/input";
-import { toast } from "sonner";
 
 const LoginForm = ({ redirect }: { redirect?: string }) => {
   const [state, formAction, isPending] = useActionState(loginUser, null);
-
-  const getFieldError = (fieldName: string) => {
-    if (state && state.errors) {
-      const error = state.errors.find((err: any) => err.field === fieldName);
-      return error.message;
-    } else {
-      return null;
-    }
-  };
-  // console.log(state);
 
   useEffect(() => {
     if (state && !state.success && state.message) {
@@ -28,9 +18,7 @@ const LoginForm = ({ redirect }: { redirect?: string }) => {
 
   return (
     <form action={formAction}>
-      {redirect && (
-        <input type="hidden" name="redirect" value={redirect}></input>
-      )}
+      {redirect && <input type="hidden" name="redirect" value={redirect} />}
       <FieldGroup>
         <div className="grid grid-cols-1 gap-4">
           {/* Email */}
@@ -40,15 +28,11 @@ const LoginForm = ({ redirect }: { redirect?: string }) => {
               id="email"
               name="email"
               type="email"
-              placeholder="example@email.com"
+              placeholder="m@example.com"
               //   required
             />
 
-            {getFieldError("email") && (
-              <FieldDescription className="text-red-600">
-                {getFieldError("email")}
-              </FieldDescription>
-            )}
+            <InputFieldError field="email" state={state} />
           </Field>
 
           {/* Password */}
@@ -61,11 +45,7 @@ const LoginForm = ({ redirect }: { redirect?: string }) => {
               placeholder="Enter your password"
               //   required
             />
-            {getFieldError("password") && (
-              <FieldDescription className="text-red-600">
-                {getFieldError("password")}
-              </FieldDescription>
-            )}
+            <InputFieldError field="password" state={state} />
           </Field>
         </div>
         <FieldGroup className="mt-4">
