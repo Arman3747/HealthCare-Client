@@ -27,7 +27,7 @@ export async function createSpeciality(_prevState: any, formData: FormData) {
       newFormData.append("file", formData.get("file") as Blob);
     }
 
-    const response = await serverFetch.post("/specialties", {
+    const response = await serverFetch.post("/specialities", {
       body: newFormData,
     });
 
@@ -45,7 +45,7 @@ export async function createSpeciality(_prevState: any, formData: FormData) {
 
 export async function getSpecialities() {
   try {
-    const response = await serverFetch.get("/specialties");
+    const response = await serverFetch.get("/specialities");
     const result = await response.json();
     return result;
   } catch (error: any) {
@@ -59,7 +59,7 @@ export async function getSpecialities() {
 
 export async function deleteSpeciality(id: string) {
   try {
-    const response = await serverFetch.delete(`/specialties/${id}`);
+    const response = await serverFetch.delete(`/specialities/${id}`);
     const result = await response.json();
     return result;
   } catch (error: any) {
